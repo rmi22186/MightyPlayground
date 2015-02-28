@@ -39,7 +39,7 @@ module.exports = {
     .then(function(foundUser) {
       if (foundUser) {
         foundUser.remove();
-        res.status(200).send('User deleted!');  //redirect to facebook login screen
+        res.status(200).sendStatus('User deleted!');  //redirect to facebook login screen
       }
     });
   }

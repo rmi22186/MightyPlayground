@@ -179,5 +179,10 @@ angular.module('thoughtdrop.messageController', [])
   };
 
   $scope.cacheMessages();
+  $scope.$broadcast('scroll.refreshComplete');
+    // $scope.apply();
+
+  //Invokes findNearby on page load for /tabs/messages
+  $scope.findNearby('nearby');
 
 });
