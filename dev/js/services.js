@@ -239,7 +239,6 @@ return factory;
 
 
 .factory('SaveMessage', function($http){ 
- 
   var sendMessage = function(message) {
     return $http({
       method: 'POST',
@@ -247,11 +246,9 @@ return factory;
       '/api/messages/' + 'savemessage',
       data: JSON.stringify(message)
     });   
-  }
-  
+  };
 
   return {
     sendMessage: sendMessage
   };
-
 });
