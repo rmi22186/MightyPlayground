@@ -7,4 +7,5 @@ module.exports = function (app) {
   app.post('/private', messageController.savePrivate);
   app.post('/private/nearby', messageController.getPrivate);
   app.post('/addreply', messageController.addReply);
+  app.post('/saveimage', messageController.saveImage);
 };

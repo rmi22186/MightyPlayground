@@ -225,64 +225,45 @@ angular.module('thoughtdrop.services', [])
 
 
 .factory('SaveMessage', function($http){ 
-  var image = {};
-
-  var saveImage = function(data) {
-    console.log('image saved!');
-    image.data = data;
-  };
-
-  var creds = {
-    bucket: 'mpbucket-hr23',
-    access_key: 'AKIAJOCFMQLT2OTUDEJQ',
-    secret_key: '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'
-  };
-
   var sendMessage = function(message) {
-    console.log('image about to be uploaded');
-    AWS.config.update({ accessKeyId: creds.access_key, secretAccessKey: creds.secret_key });
-    AWS.config.region = 'us-west-1';
-    var bucket = new AWS.S3({ params: { Bucket: creds.bucket } });
+    console.log(message);
+      // 2. The options array is passed to the cordovaCamera with specific options. For more options see the official docs for cordova camera.
+      var options = {
+        destinationType : Camera.DestinationType.DATA_URI,
+        sourceType : Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
+        allowEdit : true,
+        encodingType: Camera.EncodingType.JPEG,
+      };
+      
+      // 3 Call the ngCodrova module cordovaCamera we injected to our controller
+      $cordovaCamera.getPicture(options)
+      .then(function(imageData) {
+        var image = {};
+        var imgURI = ('data:image/jpeg;base64,' + imageData);
+        image.data = imgURI;
+        image.id = Math.floor(Math.random())*100000000;
 
-    if(image.data) {
-     var params = { Key: message.id, ContentType: image.data.type, Body: image.data, ServerSideEncryption: 'AES256' };
-      bucket.putObject(params, function(err, data) {
-        if(err) {
-          console.log(err.message);
-          return false;
-        } else {
-          console.log('Upload Done');
-
+        console.log('photo taken with contents: ' + image);
+        
+        return $http({
+          method: 'POST',
+          url: //base
+          '/api/messages/saveimage',
+          data: JSON.stringify(image)
+        })
+        .then(function(resp) {
+          console.log('Server resp to func call to storeUser: ', resp);
           return $http({
             method: 'POST',
-            url:  //base
+            url: //base
             '/api/messages/' + 'savemessage',
             data: JSON.stringify(message)
           });
-          }
-        }
-      // .on('httpUploadProgress',function(progress) {
-      //   console.log(Math.round(progress.loaded / progress.total * 100) + '% done');
-      //   })
-      );
-    } else {
-      // No File Selected
-      alert('No File Selected');
-    }
-  };
+        });
+      });
+    };
 
   return {
-    saveImage: saveImage,
     sendMessage: sendMessage
   };
-  //TODO refactor camera portion to be server side and also 
-  // return $http({
-  //     method: 'POST',
-  //     url: '/api/messages/saveimage',
-  //     data: JSON.stringify(image.data)
-  //   })
-  //   .then(function(resp) {
-  //     console.log('Server resp to func call to storeUser: ', resp);
-  //   });
-  // };
 });
