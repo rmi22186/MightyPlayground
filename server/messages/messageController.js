@@ -133,7 +133,7 @@ module.exports = {
         console.log(err);
       } else{
         var return_data = {
-          signed_request: data,
+          signed_request: req.body.src,
           url: 'https://'+ params.Bucket +'.s3.amazonaws.com/'+req.body.id
         };
         res.write(JSON.stringify(return_data));
