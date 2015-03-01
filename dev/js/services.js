@@ -246,6 +246,7 @@ return factory;
       data: JSON.stringify(message)
     });   
   };
+  
   return {
     sendMessage: sendMessage
   };

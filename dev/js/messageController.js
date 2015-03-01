@@ -86,7 +86,7 @@ angular.module('thoughtdrop.messageController', [])
         });
       })
       .then(function(resp) {
-        cosnole.log('success: ' + resp);
+        console.log('success: ' + resp);
       })
       .catch(function(err) {
         console.log(err) ;
@@ -96,7 +96,6 @@ angular.module('thoughtdrop.messageController', [])
 
   $scope.sendMessage = function() {
     $scope.closeMessageBox();
-    
     $scope.getPosition()
       .then(function(position) {
         var message = {};
@@ -106,26 +105,6 @@ angular.module('thoughtdrop.messageController', [])
         message.coordinates.lat = position.coords.latitude;
         message.coordinates.long = position.coords.longitude;
         $scope.message.text = '';
-        console.log(message);
-        SaveMessage.sendMessage(message, function() {
-          $scope.findNearby('nearby');
-        });
-      });
-  };
-
-
-  $scope.sendMessage = function() {
-    $scope.closeMessageBox();
-    $scope.getPosition()
-      .then(function(position) {
-        var message = {};
-        message.id = JSON.stringify(Math.floor(Math.random()*100000));
-        message.text = $scope.message.text;
-        message.coordinates = {};
-        message.coordinates.lat = position.coords.latitude;
-        message.coordinates.long = position.coords.longitude;
-        $scope.message.text = '';
-
         SaveMessage.sendMessage(message, function() {
           $scope.findNearby('nearby');
         });
@@ -229,7 +208,7 @@ angular.module('thoughtdrop.messageController', [])
 
   $scope.cacheMessages();
   $scope.$broadcast('scroll.refreshComplete');
-    // $scope.apply();
+  // $scope.apply();
 
   //Invokes findNearby on page load for /tabs/messages
   $scope.findNearby('nearby');
