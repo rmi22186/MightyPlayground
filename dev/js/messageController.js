@@ -73,7 +73,7 @@ angular.module('thoughtdrop.messageController', [])
         data: JSON.stringify(image)
       })
       .then(function(resp) {
-        console.log('the response is: ' + resp);
+        console.log('the response is: ' + resp.signedUrl);
       });
     });
   };

@@ -106,7 +106,7 @@ gulp.task('inject2', function(){
     .pipe(gulp.dest('www/js'));
 });
 
-gulp.task('inject3', function(){
+gulp.task('inject3', function(){ 
   gulp.src('www/js/privateServices.js')
     .pipe(replace('//base', "'https://mp-rob.herokuapp.com' +"))
     .pipe(gulp.dest('www/js'));
