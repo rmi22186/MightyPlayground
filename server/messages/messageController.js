@@ -98,7 +98,7 @@ module.exports = {
     
     var params = { 
       Bucket: process.env.amazonBUCKET,
-      Key: req.body.id,
+      Key: req.body.id.toString(),
       ContentType: 'image/jpeg',
       Body: req.body.src,
       ServerSideEncryption: 'AES256' 
