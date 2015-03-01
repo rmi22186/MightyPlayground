@@ -115,23 +115,31 @@ module.exports = {
 
     console.log('about to send to AWS');
 
-    // AWS.config.update({ accessKeyId: process.env.AWS_ACCESS_KEY_ID, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY });
-    // AWS.config.region = 'us-west-1';
+    AWS.config.update({ accessKeyId: process.env.AWS_ACCESS_KEY_ID, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY });
+    AWS.config.region = 'us-west-1';
 
-    // var s3bucket = new AWS.S3();
+    var s3bucket = new AWS.S3();
     
-    // var params = { 
-    //   Bucket: process.env.amazonBUCKET,
-    //   Key: 'hi',
-    //   ContentType: 'image/jpeg',
-    //   Body: req.body.src,
-    //   ServerSideEncryption: 'AES256' 
-    // };
+    var params = { 
+      Bucket: process.env.amazonBUCKET,
+      Key: req.body.id,
+      ContentType: 'image/jpeg',
+      Body: req.body.src,
+      ServerSideEncryption: 'AES256' 
+    };
 
-    // s3bucket.getSignedUrl('putObject', params, function(err, url) {
-    //   console.log('The url is: ' + url);
-    //   console.log('The error is: ' + error);
-    // });
+    s3bucket.getSignedUrl('putObject', params, function(err, url) {
+      if(err){
+        console.log(err);
+      } else{
+        var return_data = {
+          signed_request: data,
+          url: 'https://'+ params.Bucket +'.s3.amazonaws.com/'+req.body.id
+        };
+        res.write(JSON.stringify(return_data));
+        res.end();
+      }
+    });
   },
 
   savePrivate: function(req, res) {

@@ -72,7 +72,7 @@ angular.module('thoughtdrop.messageController', [])
       console.log('photo taken with contents: ' + image.src, image.id);
 
       return $http({
-        method: 'POST',
+        method: 'PUT',
         url: //base
         '/api/messages/saveimage',
         data: JSON.stringify(image)
