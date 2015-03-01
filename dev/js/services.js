@@ -223,43 +223,13 @@ angular.module('thoughtdrop.services', [])
   };
 })
 
-
-.factory('SaveMessage', function($http){ 
+.factory('SaveMessage', function($http, $cordovaCamera){ 
   var sendMessage = function(message) {
-    console.log(message);
-      // 2. The options array is passed to the cordovaCamera with specific options. For more options see the official docs for cordova camera.
-      var options = {
-        destinationType : Camera.DestinationType.DATA_URI,
-        sourceType : Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
-        allowEdit : true,
-        encodingType: Camera.EncodingType.JPEG,
-      };
-      
-      // 3 Call the ngCodrova module cordovaCamera we injected to our controller
-      $cordovaCamera.getPicture(options)
-      .then(function(imageData) {
-        var image = {};
-        var imgURI = ('data:image/jpeg;base64,' + imageData);
-        image.data = imgURI;
-        image.id = Math.floor(Math.random())*100000000;
-
-        console.log('photo taken with contents: ' + image);
-        
-        return $http({
-          method: 'POST',
-          url: //base
-          '/api/messages/saveimage',
-          data: JSON.stringify(image)
-        })
-        .then(function(resp) {
-          console.log('Server resp to func call to storeUser: ', resp);
-          return $http({
-            method: 'POST',
-            url: //base
-            '/api/messages/' + 'savemessage',
-            data: JSON.stringify(message)
-          });
-        });
+      return $http({
+        method: 'POST',
+        url: //base
+        '/api/messages/' + 'savemessage',
+        data: JSON.stringify(message)
       });
     };
 

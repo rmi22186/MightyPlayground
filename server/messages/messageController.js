@@ -1,7 +1,6 @@
 var Message = require('../../db/models/messages.js');
 var Q = require('q');
 var AWS = require('aws-sdk');
-AWS.config.region = 'us-west-1';
 
 module.exports = {
 
@@ -89,22 +88,26 @@ module.exports = {
   },
 
   saveImage: function(req, res) {
-    AWS.config.update({ accessKeyId: process.env.AWS_ACCESS_KEY_ID, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY });
-    AWS.config.region = 'us-west-1';
-    var bucket = new AWS.S3({ params: {Bucket: process.env.amazonBUCKET } });
-    var params = { 
-      Key: req.body.id, 
-      ContentType: 'image/jpeg', 
-      Body: req.body.data, 
-      ServerSideEncryption: 'AES256' 
-    };
-    bucket.putObject(params, function(err, data) {
-      if (err) {
-        console.log('error uploading data: ', err.message);
-      } else {
-        console.log('Upload Done');
-      }
-    });
+
+    console.log('about to send to AWS');
+
+    // AWS.config.update({ accessKeyId: process.env.AWS_ACCESS_KEY_ID, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY });
+    // AWS.config.region = 'us-west-1';
+
+    // var s3bucket = new AWS.S3();
+    
+    // var params = { 
+    //   Bucket: process.env.amazonBUCKET,
+    //   Key: 'hi',
+    //   ContentType: 'image/jpeg',
+    //   Body: req.body.src,
+    //   ServerSideEncryption: 'AES256' 
+    // };
+
+    // s3bucket.getSignedUrl('putObject', params, function(err, url) {
+    //   console.log('The url is: ' + url);
+    //   console.log('The error is: ' + error);
+    // });
   },
 
   savePrivate: function(req, res) {
