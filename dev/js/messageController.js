@@ -57,15 +57,12 @@ angular.module('thoughtdrop.messageController', [])
     
     console.log('about to take picture');
     // 3 Call the ngCodrova module cordovaCamera we injected to our controller
-    $cordovaCamera.getPicture(options)
+    var takePic = $cordovaCamera.getPicture(options)
     .then(function(imageData) {
       var image = {};
       var imgURI = ('data:image/jpeg;base64,' + imageData);
       image.src = imgURI;
       image.id = Math.floor(Math.random()*100000000);
-
-      console.log('photo taken with contents: ' + image.src, image.id);
-
       return $http({
         method: 'PUT',
         url: //base
@@ -73,7 +70,18 @@ angular.module('thoughtdrop.messageController', [])
         data: JSON.stringify(image)
       })
       .then(function(resp) {
-        console.log('the response is: ' + resp.signedUrl);
+        console.log('the response is: ' + resp.data.signedUrl);
+        return $http({
+          method: 'PUT',
+          url: resp.data.signedUrl,
+          data: imageData,
+          headers: {
+            'Content-Type': 'image/jpeg'
+          },
+        });
+      })
+      .catch(function(err) {
+        console.log(err) ;
       });
     });
   };

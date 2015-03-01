@@ -100,7 +100,6 @@ module.exports = {
       Bucket: process.env.amazonBUCKET,
       Key: req.body.id.toString(),
       ContentType: 'image/jpeg',
-      Body: req.body.src,
       ServerSideEncryption: 'AES256' 
     };
 
@@ -108,7 +107,7 @@ module.exports = {
       if(err){
         console.log(err);
       } else {
-        console.log(url);
+        console.log('url confirmation: ' + url);
         var return_data = {
           signedUrl: url,
           url: 'https://'+ params.Bucket +'.s3.amazonaws.com/'+req.body.id
