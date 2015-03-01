@@ -71,6 +71,9 @@ angular.module('thoughtdrop.messageController', [])
         url: //base
         '/api/messages/saveimage',
         data: JSON.stringify(image)
+      })
+      .then(function(resp) {
+        console.log('the response is: ' + resp);
       });
     });
   };
