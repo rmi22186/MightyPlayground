@@ -131,13 +131,13 @@ module.exports = {
     s3bucket.getSignedUrl('putObject', params, function(err, url) {
       if(err){
         console.log(err);
-      } else{
-        console.log('success!')
+      } else {
+        console.log(url);
         var return_data = {
-          signed_request: req.body.src,
+          signedUrl: url,
           url: 'https://'+ params.Bucket +'.s3.amazonaws.com/'+req.body.id
         };
-        res.write(JSON.stringify(return_data));
+        res.send(JSON.stringify(return_data));
         res.end();
       }
     });
