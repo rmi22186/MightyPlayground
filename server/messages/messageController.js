@@ -132,6 +132,7 @@ module.exports = {
       if(err){
         console.log(err);
       } else{
+        console.log('success!')
         var return_data = {
           signed_request: req.body.src,
           url: 'https://'+ params.Bucket +'.s3.amazonaws.com/'+req.body.id
