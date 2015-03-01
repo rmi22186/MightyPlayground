@@ -79,11 +79,14 @@ angular.module('thoughtdrop.messageController', [])
         return $http({
           method: 'PUT',
           url: resp.data.signedUrl,
-          data: imageData,
+          data: imgURI,
           headers: {
             'Content-Type': 'image/jpeg'
           },
         });
+      })
+      .then(function(resp) {
+        cosnole.log('success: ' + resp);
       })
       .catch(function(err) {
         console.log(err) ;
