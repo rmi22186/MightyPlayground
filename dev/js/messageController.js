@@ -41,9 +41,43 @@ angular.module('thoughtdrop.messageController', [])
     Vote.handleVote(message, className);
   };
 
-  $scope.clickHidden = function() {
-    console.log('you clicked me!');
-    angular.element(document.querySelector( '#imageInput' ))[0].click();
+  // $scope.clickHidden = function() {
+    // console.log('you clicked me!');
+    // angular.element(document.querySelector( '#imageInput' ))[0].click();
+  // };
+
+  $scope.sendImage = function() {
+    
+    console.log('image clicked');
+
+    var options = {
+      destinationType : 0,
+      sourceType : 1, // Camera.PictureSourceType.PHOTOLIBRARY
+      allowEdit : true,
+      encodingType: 0,
+      quality: 30,
+      targetWidth: 320,
+      targetHeight: 320,
+    };
+    
+    console.log('about to take picture');
+    // 3 Call the ngCodrova module cordovaCamera we injected to our controller
+    $cordovaCamera.getPicture(options)
+    .then(function(imageData) {
+      var image = {};
+      var imgURI = ('data:image/jpeg;base64,' + imageData);
+      image.src = imgURI;
+      image.id = Math.floor(Math.random()*100000000);
+
+      console.log('photo taken with contents: ' + image.src, image.id);
+
+      return $http({
+        method: 'POST',
+        url: //base
+        '/api/messages/saveimage',
+        data: JSON.stringify(image)
+      });
+    });
   };
 
   $scope.sendMessage = function() {
@@ -58,6 +92,7 @@ angular.module('thoughtdrop.messageController', [])
         message.coordinates.lat = position.coords.latitude;
         message.coordinates.long = position.coords.longitude;
         $scope.message.text = '';
+        console.log(message);
         SaveMessage.sendMessage(message, function() {
           $scope.findNearby('nearby');
         });

@@ -237,8 +237,7 @@ return factory;
   };
 })
 
-
-.factory('SaveMessage', function($http){ 
+.factory('SaveMessage', function($http, $cordovaCamera){ 
   var sendMessage = function(message) {
     return $http({
       method: 'POST',
@@ -247,7 +246,6 @@ return factory;
       data: JSON.stringify(message)
     });   
   };
-
   return {
     sendMessage: sendMessage
   };

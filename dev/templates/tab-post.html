@@ -13,6 +13,10 @@
         <!-- <img ng-repeat="image in images" ng-src="{{urlForImage(image)}}" height="200px"/> -->
       <!-- </label> -->
       <label class="item">
+        <button class="button button-block button-dark" ng-click="sendImage()">Take a Pic!</button>
+        <img ng-src= "data:image/jpeg;base64,{{image}}"/>
+      </label>
+      <label class="item">
         <button class="button button-block button-dark" ng-click="sendMessage()">Submit!</button>
       </label>
     </ion-content>
