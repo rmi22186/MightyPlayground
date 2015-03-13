@@ -120,7 +120,7 @@ return factory;
         if (!upVoteButtonLock[message._id] ) {
         //Lock upvote button by setting upVoteButtonLock[message._id] to True
 
-        upVoteButtonLock[message._id] = true; 
+        upVoteButtonLock[message._id] = true;
         //Increment vote in DOM and Top/New Cache and send incremented vote to server
         console.log('////////New messages BEFORE upvote', CachePublicMessages.newMessages);
         console.log('////////Top messages BEFORE upvote', CachePublicMessages.topMessages);
@@ -128,7 +128,7 @@ return factory;
         incrementCacheVote(message);
         console.log('////////New messages AFTER upvote', CachePublicMessages.newMessages);
         console.log('////////Top messages AFTER upvote', CachePublicMessages.topMessages);
-        //Unlock downvote button by setting downVoteButtonLock[message._id] to False  
+        //Unlock downvote button by setting downVoteButtonLock[message._id] to False
         downVoteButtonLock[message._id] = false;
 
         } else if (upVoteButtonLock[message._id] === true) { //Otherwise, if upVoteButtonLock[message._id] is True
@@ -145,7 +145,7 @@ return factory;
         //Decrement vote in DOM and Top/New Cache and send decremented vote to server
         //decrementVote(message);
         decrementCacheVote(message);
-        //Unlock upvote button by setting upVoteButtonLock[message._id] to False  
+        //Unlock upvote button by setting upVoteButtonLock[message._id] to False
         upVoteButtonLock[message._id] = false;
 
         } else if (upVoteButtonLock[message._id] === true) { //Otherwise, if upVoteButtonLock[message._id] is True
@@ -155,14 +155,14 @@ return factory;
     }
   };
 
-  // var incrementVote = function(message) {    
+  // var incrementVote = function(message) {
   //     //Increment vote count in the DOM
   //     message.votes++;
   //     console.log('upVOTING and changing vote to: ' + message.votes);
   //     //send incremented count along with messageID to server
   //     sendData('updatevote', message._id, message.votes);
   //     console.log('Sending vote of: ' + message.votes + ' to server!');
-  // }; 
+  // };
 
   // var decrementVote = function(message) {
   //     //Decrement vote count in the DOM
@@ -201,7 +201,7 @@ return factory;
       if (CachePublicMessages.newMessages[i]._id === (Number(messageid))) {
         return CachePublicMessages.newMessages[i];
       }
-    };
+    }
 
     return null;
 
@@ -248,7 +248,7 @@ return factory;
 })
 
 
-.factory('Messages', function($http, $cordovaCamera, CachePublicMessages){
+.factory('Messages', function($http, Camera, CachePublicMessages){
   var globalImage = {};
 
   var returnGlobal = function() {
@@ -258,14 +258,7 @@ return factory;
   var sendMessage = function(message, image, callback) {
     //if there is an image, do a put request to the signed url to upload the image
     if (image) {
-      return $http({
-        method: 'PUT',
-        url: globalImage.signedUrl, //change to image.signedUrl?
-        data: globalImage.src, //change to image.src?
-        headers: {
-          'Content-Type': 'image/jpeg'
-        },
-      })
+      Camera.uploadImage()
       .then(function(resp) {
         console.log('image saved successfully!');
         //since image sent successfully, set message.id to equal image.id for convenience
@@ -307,43 +300,20 @@ return factory;
     }
   };
 
-  var storeImage = function() {
-    console.log('store image activated');
-    var options = {
-      destinationType : 0,
-      sourceType : 0,
-      allowEdit : true,
-      encodingType: 0,
-      quality: 30,
-      targetWidth: 320,
-      targetHeight: 320,
-    };
-
-    $cordovaCamera.getPicture(options)
+  var storeImageAndSignURL = function() {
+    Camera.takePic()
     .then(function(imageData) {
-      globalImage.src = 'data:image/jpeg;base64,' + imageData;
-      globalImage.id = Math.floor(Math.random()*100000000);
-      console.log('globalImage src: ' + globalImage.src);
-      console.log('globalImage id: ' + globalImage.id);
-      return $http({
-        method: 'PUT',
-        url: //base
-        '/api/messages/getsignedurl',
-        data: JSON.stringify(globalImage)
-      })
-      .then(function(resp) {
-        globalImage.shortUrl = resp.data.shortUrl;
-        globalImage.signedUrl = resp.data.signedUrl;
-        console.log('successfully got response URL!');
-        console.log('globalimage short img url: ' + globalImage.shortUrl);
-        console.log('globalimage signed img url: ' + globalImage.signedUrl);
-      });
+      Camera.storeImage(imageData);
+      Camera.getSignedUrl();
+    })
+    .catch(function(error) {
+      console.log('there was an error: ' + error);
     });
   };
 
   return {
     sendMessage: sendMessage,
-    storeImage: storeImage,
-    returnGlobal: returnGlobal
+    returnGlobal: returnGlobal,
+    storeImageAndSignURL: storeImageAndSignURL
   };
 });

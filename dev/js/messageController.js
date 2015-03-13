@@ -1,7 +1,7 @@
 angular.module('thoughtdrop.messageController', [])
 
 
-.controller('messageController', function($scope, $timeout, $http, $cordovaGeolocation, $ionicModal, $cordovaCamera, $location, $state, MessageDetail, Vote, $window, $localStorage, CachePublicMessages, $ionicLoading, Messages) {
+.controller('messageController', function($scope, $timeout, $http, $cordovaGeolocation, $ionicModal, $cordovaCamera, $location, $state, MessageDetail, Vote, $window, $localStorage, CachePublicMessages, $ionicLoading, Messages, Camera) {
   //TODO: change 'findNearby' to 'findNearbyMessages' (more intuitive)
         //limit number of times user can upvote and downvote to one per message
         //look into using socket.io to handle simultaneous upvote/downvote requests from clients
@@ -64,8 +64,8 @@ angular.module('thoughtdrop.messageController', [])
     $scope.loadingIndicator.hide();
   };
     
-  $scope.storeImage = function() {
-    Messages.storeImage();
+  $scope.storeImageAndSignURL = function() {
+    Messages.storeImageAndSignURL();
   };
 
   $scope.sendMessage = function() {
@@ -88,7 +88,7 @@ angular.module('thoughtdrop.messageController', [])
       message.coordinates.long = position.coords.longitude;
       $scope.message.text = '';
       //if image was taken, Messages.globalImage will not be null, send message with globalImage
-      var photo = Messages.returnGlobal();
+      var photo = Camera.returnImage();
       if (Object.keys(photo).length > 0) {
         console.log('yay we have a photo!');
         console.log(Object.keys(photo));

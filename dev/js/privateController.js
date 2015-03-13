@@ -1,6 +1,6 @@
 angular.module('thoughtdrop.privateController', [])
 
-.controller('privateController', function($scope, $timeout, $ionicModal, Private, Geolocation, $window, $localStorage, $cordovaContacts, $location, PrivateDetail, GeofenceService, $state, $stateParams) {
+.controller('privateController', function($scope, $timeout, $ionicModal, Private, Geolocation, $window, $localStorage, $cordovaContacts, $location, PrivateDetail, GeofenceService, $state, $stateParams, Camera) {
 
   //TODO: change 'findNearby' to 'findNearbyMessages' (more intuitive)
         //limit number of times user can upvote and downvote to one per message
@@ -24,7 +24,7 @@ angular.module('thoughtdrop.privateController', [])
   };
 
   $scope.storeImage = function() {
-    Private.storeImage();
+    Camera.takePic();
   };
 
   $scope.sendMessage = function() {

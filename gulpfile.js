@@ -100,10 +100,11 @@ gulp.task('inject1', function(){
     .pipe(replace('//base', "'https://thoughtdrop.herokuapp.com' +"))
     .pipe(gulp.dest('www/js'));
 });
+
 gulp.task('inject2', function(){
-  gulp.src('www/js/services.js')
+  gulp.src('www/js/services/*.js')
     .pipe(replace('//base', "'https://thoughtdrop.herokuapp.com' +"))
-    .pipe(gulp.dest('www/js'));
+    .pipe(gulp.dest('www/js/services'));
 });
 
 gulp.task('inject3', function(){
