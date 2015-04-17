@@ -1,6 +1,6 @@
 angular.module('thoughtdrop.controllers', [])
 
-.controller('AuthCtrl', function($scope, $cordovaOauth, $location, $localStorage, $http, Facebook, $window, $state){
+.controller('AuthCtrl', function($scope, $cordovaOauth, $location, $localStorage, $http, Facebook, $window, $state, CachePublicMessages, $timeout){
 
   $scope.data = {};
 
@@ -20,7 +20,6 @@ angular.module('thoughtdrop.controllers', [])
   };
 
  $scope.getProfile = function() {
-
      // if($localStorage.hasOwnProperty("accessToken") === true) {
        $http.get("https://graph.facebook.com/v2.2/me", {
          params: {
@@ -34,7 +33,6 @@ angular.module('thoughtdrop.controllers', [])
         console.log('fb data: ' + JSON.stringify(result.data));
         Facebook.keepInfo(result.data) //saves userData in factory
         })
-
       .catch(function(error) {
           console.log('error!: ' + error);
         })
@@ -51,8 +49,11 @@ angular.module('thoughtdrop.controllers', [])
 
    $scope.storeUser = function() {
     console.log('storeUser triggered - phoneNumber: ', $scope.data.phoneNumber);
+    $location.path('/tab/messages');
     Facebook.storeUser($scope.data);
-    
+  };
+
+  $scope.goToPublicMessages = function() {
     $location.path('/tab/messages');
   };
 

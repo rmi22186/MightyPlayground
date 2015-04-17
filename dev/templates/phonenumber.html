@@ -1,14 +1,16 @@
 <ion-view view-title="Chats">
-  <ion-content>
-    <div class="bar bar-header bar-dark">
+  <ion-content scroll=false>
+    <div class="bar-header bar-calm">
+      <div class="phone-number-title">
       <h1 class="title">Enter your phone number</h1>
+      </div>
     </div>
     <div class="item item-input-inset">
       <label class="item-input-wrapper">
         <input ng-model="data.phoneNumber" type="text" placeholder="XXX-XXX-XXXX">
       </label>
       <button class="button button-small" ng-click="storeUser()">
-        Submit
+        Next 
       </button>
     </div>
   </ion-content>

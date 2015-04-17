@@ -12,29 +12,11 @@
 	margin-top: 15%;
 }
 
-
-.title{
-  display: table;
-  margin: 0 auto;
-  font-size: 4em;
-  margin-bottom: 2%;
-  font-weight: 300px;
-  font-style: helvetica;
-
-}
 .slogan{
   display: table;
   margin: 0 auto;
   font-size: 2em;
 }
-/* Phone number Page Styling */
-.bar {
-  position: relative;
-}
-
-/*.button-positive{
-     right:70px !important;
-}*/
 
 .button.button-positive.fb-button {
   margin-top: 15%;
@@ -42,6 +24,26 @@
   margin-left: auto;
   border-radius: 10px;
   width: 300px;
+}
+
+.new-button {
+  margin-right: 20px
+}
+
+
+/* Phone number Page Styling */
+.bar {
+  position: relative;
+}
+
+.phone-number-title {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.message-detail-title {
+  margin-top: 15px; 
+  font-size: 24px;
 }
 
 /*Add map image to login background*/
@@ -70,7 +72,12 @@
   margin-top: 6%
 }
 
-/* Main Public Message Feed Page Styling */
+/* Main Public & Private Message Feed Page Styling */
+
+.text-pulling {
+/*Prevents pull refresh from sticking out into page*/
+  margin-bottom: 2.5%; 
+}
 
 .header-container {
   width:100%;
@@ -78,69 +85,171 @@
 .sort-buttons {
   text-align: left;
   display:inline;
+  margin-left: 2.5%;
 }
 
 .sort-buttons button {
-  border:1.5px solid transparent;
+  border:2.0px solid transparent;
   border-color: white;
-  background-color: Transparent;
+  background-color: transparent;
   color: white;
+  font-size: 1.25em;
+
 }
 
-.drop-button {
+.sort-buttons .new-button {
+  margin-left: .5%;
+}
+
+.compose-button {
   /*Alignment*/
   text-align: right;
   width: 15%;
   float:right;
+  margin-right: 2.5%;
+
 }
-.drop-button button {
+.compose-button .ion-compose {
   /*Button Styling*/
-  border:1.5px solid transparent;
-  border-color: white;
-  background-color: Transparent;
+  border: none;
   color: white;
+  font-size: 2.5em; 
+  padding: 10% 30% 10% 30%;
+}
+
+.text-pulling {
+/*Prevents pull refresh from sticking out into page*/
+  margin-bottom: 2.5%; 
 }
 
 .card {
-  position: relative;
-/*  z-index: -100;*/
+  min-height: 80px;
 }
 
-.ion-plus-round {
-  z-index: 10;
-  padding: 3% 6% 3% 3%;
-  position: relative;
+.message-block {
+  min-height: 80px;
 }
 
-.ion-minus-round {
-  z-index: 10;
-  padding: 3% 3% 3% 6%;
-  position: relative;
-}
-
-.message-text {
-  /*Horizontal Centering*/
-  width:75%;
-  text-align: left;
-  float:left;
-  /*Vertical Centering- NOT WORKING!*/
-  margin-top: auto;
-  margin-bottom: auto;
-  vertical-align: middle;
-
-  /*Message Text Styling*/
-  font-size: 1em;
-  font-family: helvetica;
-  font-weight: 500;
-  height:100%;
+.message-block a {
+  color: #0a9ec7;
+  text-decoration: none;  
+  width: 80%;
 }
 
 .votes-container {
-  width:20%;
-  text-align: right;
-  float:right;
-
+ width: 21px;
+ float: right;
+ text-align: right;
+ margin-right: -10px;
+ color: #0a9ec7;
+ margin-bottom: .8em;
 }
+
+
+.message-text {
+  width: 100%;
+  float: left;
+  height: 80px;
+  margin-left: -20px;
+  /*font-size: 1em;*/
+  font-family: helvetica;
+  font-weight: 500;
+}
+
+  /*Vertical Centering- NOT WORKING!*/
+ /* margin-top: auto;
+  margin-bottom: auto;
+  vertical-align: middle;*/
+
+/*.votes-container {
+  position: absolute;
+  width: 5%;
+  text-align: center;
+  float: right;
+  right: 0;
+  top: 50%;
+  margin-top: -16px;
+}
+*/
+
+.ion-plus-round {
+  padding: 4% 7% 4% 4%;
+  font-size: 1.3em;
+  margin: auto;
+}
+
+.ion-minus-round {
+  padding: 4% 4% 4% 7%;
+  font-size: 1.3em;
+  margin: auto;
+}
+
+.ion-chevron-up {
+  font-size: 1.8em;
+}
+
+.ion-chevron-down {
+  font-size: 1.8em;
+}
+
+.message-date {
+  font-size: .5em;
+}
+
+.image-thumbnail {
+  margin-right: 4px
+}
+
+/*Post Form for Public and Private Messages*/
+
+.post-form {
+  margin-top: 4%;
+}
+.post-form p {
+  margin-top: 5%;
+  font-size: .9em;
+  text-align: center;
+}
+
+.close-button .ion-close-round {
+  font-size: 1.6em;
+  color: #0a9ec7;
+  padding: 10% 10% 5% 4%;
+}
+
+.posting-directions span {
+  margin-right: 2%;
+}
+
+.camera-button {
+  position: absolute;
+  font-size: 3em;
+  color: #0a9ec7;
+  margin-right: 5%;
+  z-index: 1000;
+  margin-left: 2%;
+  margin-top: -1.6%;
+  padding: 2% 2% 2% 2%;
+}
+.message-text-label input {
+  margin-left: 18%;
+  color: #0a9ec7;
+  margin-right: 5%;
+}
+
+.drop-button button {
+  width: 80%;
+  margin: auto;
+}
+
+.drop-pin {
+  margin-right: 0 2% 0 0;
+  margin-bottom: -10%;
+}
+.drop-pin .ion-pin {
+  font-size: 1.5em;
+}
+
 
 /* Message Detail Page Styling */
 
@@ -149,16 +258,223 @@
   margin:0 auto 0 auto;
 }
 
-.parent {
-  margin:50px; 
-  text-align:center;
+.message-detail-text {
+  text-align: center;
+  /*color: #0060B6;*/
+}
+.message-detail-image {
+  width: 100%;
+}
+
+.message-detail-image img {
+  width: 100%;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 10px
+}
+
+/*.message-detail-header {
+  width: 50%;
+  margin: 0 auto;
+}*/
+
+.reply-button-right {
+  margin-left: auto;
+}
+
+.message-detail-reply-input-label {
+  width:80%;
 }
 
 .hidden { 
   display: none !important;
 }
 
-.map {
-  width: 100%;
-  height: 100%;
+.fileContainer [type=file] {   
+  opacity: 0 !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
 }
+
+.hidden { 
+  display: none !important;
+}
+
+.fileContainer [type=file] {   
+  opacity: 0 !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+
+}
+
+/* Empty. Add your own CSS if you like */
+
+/*center pin*/
+.centerMarker{
+  position:absolute;
+  /*url of the marker*/
+  /*background:url(../img/logo_pin.png) no-repeat;*/
+  /*center the marker*/
+  top:50%;left:50%;
+  z-index:200;
+  /*fix offset when needed*/
+  margin-left:-40px;
+  margin-top:-72px;
+  /*size of the image*/
+/*  height:34px;
+  width:20px;
+  cursor:pointer;*/
+}
+
+#coverageText {
+  position:absolute;
+  /*url of the marker*/
+  /*background:url(../img/logo_pin.png) no-repeat;*/
+  /*center the marker*/
+  top:70px;left:120px;
+  z-index:1;
+  /*fix offset when needed*/
+}
+
+/*currently copy and paste from createmap.html*/
+#map-canvas {
+  height: 100%;
+  margin: 0px;
+  padding: 0px
+}
+
+.containerMap {
+  position: relative;
+/*  width: 100%;
+  height: 100%;*/
+}
+
+#over_map {
+  position: absolute;
+  bottom: 0;
+  right:0;
+  width:100%;
+  margin-bottom: -10px;
+  z-index: 99;
+}
+
+.controls {
+  margin-top: 40px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 300;
+  margin-left: 0px;
+  padding: 0 11px 0 11px;
+  text-overflow: ellipsis;
+  height: 40px;
+  width: 250px;
+}
+
+h4 {
+  color: red;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.circle {
+  width:106px;
+  height:106px;
+  border-radius:50%;
+  line-height:500px;
+  background: rgba(148, 234, 253, 0.4);
+  border: 2px solid rgba(51,113,244,1);
+  
+  position:absolute;
+  top:50%;left:50%;
+  z-index:100;
+  margin-left:-53px;
+  margin-top:-53px;
+}
+
+/*RED CANCEL BUTTON*/ 
+/*http://codepen.io/shidhincr/pen/ICLBD*/
+/*.redfamily {
+  color: red; 
+}
+.search-box,.close-icon,.search-wrapper {
+  position: relative;
+  padding: 10px;
+}
+.search-wrapper {
+  width: 500px;
+  margin: auto;
+  margin-top: 50px;
+}
+.search-box {
+  width: 80%;
+  border: 1px solid #ccc;
+  outline: 0;
+  border-radius: 15px;
+}
+.search-box:focus {
+  box-shadow: 0 0 15px 5px #b0e0ee;
+  border: 2px solid #bebede;
+}
+.close-icon {
+  border:1px solid transparent;
+  background-color: transparent;
+  display: inline-block;
+  vertical-align: middle;
+  outline: 0;
+  cursor: pointer;
+}
+.close-icon:after {
+  content: "X";
+  display: block;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  background-color: #FA9595;
+  z-index:1;
+  right: 35px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 2px;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-weight: normal;
+  font-size: 12px;
+  box-shadow: 0 0 2px #E50F0F;
+  cursor: pointer;
+}
+.search-box:not(:valid) ~ .close-icon {
+  display: none;
+}*/
